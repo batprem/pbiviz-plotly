@@ -1,0 +1,89 @@
+{
+    "dataRoles": [
+        {
+            "displayName": "features",
+            "name": "features",
+            "kind": "GroupingOrMeasure"
+        },
+        {
+            "displayName": "color",
+            "name": "color",
+            "kind": "Measure"
+        }
+    ],
+    "objects": {
+        "dataPoint": {
+            "properties": {
+                "defaultColor": {
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                },
+                "showAllDataPoints": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "fill": {
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                },
+                "fillRule": {
+                    "type": {
+                        "fill": {}
+                    }
+                },
+                 "fontSize": {
+                    "type": {
+                        "formatting": {
+                            "fontSize": true
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "dataViewMappings": [
+        {
+            "categorical": {
+                "categories": {
+                "for": { "in": "features" },
+                "dataReductionAlgorithm": {
+                    "window": { "count": 10000000 }
+                    }
+                },
+                "values": {
+                    "select": [
+                        {
+                            "bind": {
+                                "to": "color"
+                            }
+                        }
+                    ]
+                }
+            }
+            
+        }
+    ],
+    "privileges": [
+        {
+            "name": "WebAccess",
+            "essential": true,
+            "parameters": [
+                "https://cdn.jsdelivr.net/",
+                "https://pypi.org/",
+                "https://cdn.plot.ly/",
+                "https://files.pythonhosted.org/"
+            ]
+        }
+    ]
+}
