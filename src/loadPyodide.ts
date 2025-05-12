@@ -1,7 +1,3 @@
-declare function loadPyodide(options: {
-    indexURL: string;
-  }): Promise<Pyodide>;
-  
 export interface Pyodide {
     runPython: (code: string) => any;
     runPythonAsync: (code: string) => Promise<any>;
