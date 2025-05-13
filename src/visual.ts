@@ -104,7 +104,7 @@ else:
     color = None
     label_name = None
 `
-    pyodide.runPython(pythonCode);
+    await pyodide.runPythonAsync(pythonCode);
 }
 
 // Function to generate and render a Plotly chart
@@ -124,7 +124,7 @@ fig.to_json()
     `;
 
     // Run Python code and get Plotly JSON
-    const plotlyJson = pyodide.runPython(pythonCode);
+    const plotlyJson = await pyodide.runPythonAsync(pythonCode);
 
     // Convert JSON string to JavaScript object
     const plotData = JSON.parse(plotlyJson);
@@ -155,12 +155,12 @@ export class Visual implements IVisual {
     }
 
     public async update(options: VisualUpdateOptions) {
+        console.log('update', options);
         this.formattingSettings = this.formattingSettingsService.populateFormattingSettingsModel(VisualFormattingSettingsModel, options.dataViews[0]);
         if (this.updateCount === 0) {
             await this.initPyodide();
             await this.pyodide.runPythonAsync("print('Hello, world! from pyodide')");
         }
-
         // Load the data into the pyodide global variable named dataset_raw
         console.log(options)
         this.pyodide.globals.set("dataset_raw", JSON.stringify(options.dataViews[0].categorical));
